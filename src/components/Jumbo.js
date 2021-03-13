@@ -31,13 +31,11 @@ const MouseIcon = styled(Mouse)`
   border-radius: 50px;
 `;
 
-const Header = ({ image, children }) => {
-  return (
-    <Article image={image}>
-      <Div>{children}</Div>
-      <MouseIcon />
-    </Article>
-  );
-};
+const Header = ({ image, children }) => (
+  <Article image={image}>
+    <Div>{children}</Div>
+    <MouseIcon />
+  </Article>
+);
 
 export default Header;
