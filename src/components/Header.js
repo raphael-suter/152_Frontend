@@ -11,7 +11,9 @@ const StyledNavbar = styled(({ scrolled, ...props }) => <Navbar {...props} />)`
   right: 0;
   padding: 0 1.5rem;
   background: ${({ scrolled }) => (scrolled ? "white" : "transparent")};
-  box-shadow: ${({ scrolled }) => (scrolled ? "0 0 4px black" : "none")};
+  box-shadow: ${({ scrolled }) =>
+    scrolled ? "0 0 6px rgb(0, 0, 0, 0.4)" : "none"};
+  z-index: 1000;
 `;
 
 const Div = styled.div`
@@ -40,7 +42,7 @@ const StyledNavLink = styled(({ scrolled, ...props }) => (
   font-weight: bold;
   text-shadow: ${({ scrolled }) =>
     scrolled ? "none" : "0 0 6px rgb(0, 0, 0, 0.4)"};
-  border-radius: 20px;
+  border-radius: 0.25rem;
   color: ${({ scrolled }) => (scrolled ? "black" : "white")};
 
   &:hover {

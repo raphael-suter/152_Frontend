@@ -1,6 +1,7 @@
 import React from "react";
 import Jumbo from "../components/Jumbo";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const Docs = () => (
   <>
@@ -10,6 +11,7 @@ const Docs = () => (
       title="Dokumentation"
       subtitle="Modul 152, Raphael Suter"
     />
+    <Footer />
   </>
 );
 

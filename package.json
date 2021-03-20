@@ -1,7 +1,6 @@
 {
   "name": "152_frontend",
   "version": "1.0.0",
-  "private": true,
   "dependencies": {
     "bootstrap": "^4.6.0",
     "react": "^17.0.1",
