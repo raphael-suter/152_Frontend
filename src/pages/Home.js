@@ -27,7 +27,6 @@ const Home = () => (
       <p>Modul 152, Raphael Suter</p>
       <Button variant="outline-light">Dokumentation</Button>
     </Container>
-    <Separator color1="black" color2="white" toRight />
     <Footer />
   </>
 );
