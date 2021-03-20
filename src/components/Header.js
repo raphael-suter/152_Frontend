@@ -35,15 +35,21 @@ const TreeFillIcon = styled(({ scrolled, ...props }) => (
 const StyledNavLink = styled(({ scrolled, ...props }) => (
   <NavLink {...props} />
 ))`
-  margin-left: 0.5rem;
-  padding: 0.4rem 1rem;
+  margin-left: 1rem;
+  padding: 0.4rem 0;
   font-weight: bold;
-  text-shadow: ${({ scrolled }) => (scrolled ? "none" : "0 0 4px black")};
+  text-shadow: ${({ scrolled }) =>
+    scrolled ? "none" : "0 0 6px rgb(0, 0, 0, 0.4)"};
   border-radius: 20px;
   color: ${({ scrolled }) => (scrolled ? "black" : "white")};
 
-  &:hover,
+  &:hover {
+    text-decoration: none;
+    color: ${({ scrolled }) => (scrolled ? "black" : "white")};
+  }
+
   &.active {
+    padding: 0.4rem 1rem;
     text-decoration: none;
     text-shadow: none;
     background: ${({ scrolled }) => (scrolled ? "black" : "white")};

@@ -1,6 +1,7 @@
 import React from "react";
 import { ArrowDown } from "react-bootstrap-icons";
 import styled, { keyframes } from "styled-components";
+import { Link } from "react-router-dom";
 
 const Article = styled.article`
   width: 100%;
@@ -20,6 +21,47 @@ const Div = styled.div`
   max-width: 1000px;
 `;
 
+const H1 = styled.h1`
+  font-size: 35px;
+  font-weight: bold;
+  text-shadow: 0 0 6px rgb(0, 0, 0, 0.4);
+  color: white;
+
+  @media (min-width: 375px) {
+    font-size: 40px;
+  }
+
+  @media (min-width: 414px) {
+    font-size: 45px;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 55px;
+  }
+`;
+
+const P = styled.p`
+  font-size: 16px;
+  text-shadow: 0 0 6px rgb(0, 0, 0, 0.4);
+  color: white;
+
+  @media (min-width: 375px) {
+    font-size: 20px;
+  }
+
+  @media (min-width: 414px) {
+    font-size: 24px;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 28px;
+  }
+`;
+
+const StyledLink = styled(Link)`
+  box-shadow: 0 0 6px rgb(0, 0, 0, 0.4);
+`;
+
 const jump = keyframes`
     0% {
       transform: translateY(0);
@@ -37,16 +79,25 @@ const ArrowDownIcon = styled(ArrowDown)`
   bottom: 2rem;
   width: 40px;
   height: 40px;
-  padding: 10px;
+  padding: 6px;
   border-radius: 100%;
+  border: 2px solid white;
   background: rgb(0, 0, 0, 0.5);
   color: white;
   animation: ${jump} 2s linear infinite;
 `;
 
-const Header = ({ image, children }) => (
+const Header = ({ image, title, subtitle, link, linkText }) => (
   <Article image={image}>
-    <Div>{children}</Div>
+    <Div>
+      <H1>{title}</H1>
+      <P>{subtitle}</P>
+      {link && (
+        <StyledLink to={link} className="btn btn-warning">
+          {linkText}
+        </StyledLink>
+      )}
+    </Div>
     <ArrowDownIcon />
   </Article>
 );
