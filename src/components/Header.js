@@ -4,50 +4,61 @@ import { TreeFill } from "react-bootstrap-icons";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-const StyledNavbar = styled(Navbar)`
-  padding: 1rem 0;
+const StyledNavbar = styled(({ scrolled, ...props }) => <Navbar {...props} />)`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background: ${({ backgroundColor }) => backgroundColor};
+  padding: 0 1.5rem;
+  background: ${({ scrolled }) => (scrolled ? "white" : "transparent")};
+  box-shadow: ${({ scrolled }) => (scrolled ? "0 0 4px black" : "none")};
 `;
 
 const Div = styled.div`
   width: 100%;
   max-width: 1000px;
+  height: 60px;
   margin: auto;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 `;
 
-const TreeFillIcon = styled(TreeFill)`
-  width: 25px;
-  height: 25px;
-  color: ${({ foregroundColor }) => foregroundColor};
+const TreeFillIcon = styled(({ scrolled, ...props }) => (
+  <TreeFill {...props} />
+))`
+  width: 28px;
+  height: 28px;
+  color: ${({ scrolled }) => (scrolled ? "black" : "white")};
 `;
 
-const StyledNav = styled(Nav)`
-  margin-left: auto;
-`;
-
-const StyledNavLink = styled(NavLink)`
-  margin-left: 1rem;
+const StyledNavLink = styled(({ scrolled, ...props }) => (
+  <NavLink {...props} />
+))`
+  margin-left: 0.5rem;
+  padding: 0.4rem 1rem;
   font-weight: bold;
-  color: ${({ foregroundColor }) => foregroundColor};
+  text-shadow: ${({ scrolled }) => (scrolled ? "none" : "0 0 4px black")};
+  border-radius: 20px;
+  color: ${({ scrolled }) => (scrolled ? "black" : "white")};
+
+  &:hover,
+  &.active {
+    text-decoration: none;
+    text-shadow: none;
+    background: ${({ scrolled }) => (scrolled ? "black" : "white")};
+    color: ${({ scrolled }) => (scrolled ? "white" : "black")};
+  }
 `;
 
 const Header = () => {
-  const [backgroundColor, setBackgroundColor] = useState("transparent");
-  const [foregroundColor, setForegroundColor] = useState("white");
+  const [scrolled, setScrolled] = useState(false);
 
   const handleScroll = () => {
     if (window.pageYOffset > 50) {
-      setBackgroundColor("white");
-      setForegroundColor("black");
+      setScrolled(true);
     } else {
-      setBackgroundColor("transparent");
-      setForegroundColor("white");
+      setScrolled(false);
     }
   };
 
@@ -57,17 +68,17 @@ const Header = () => {
   }, []);
 
   return (
-    <StyledNavbar backgroundColor={backgroundColor}>
+    <StyledNavbar scrolled={scrolled}>
       <Div>
-        <TreeFillIcon foregroundColor={foregroundColor} />
-        <StyledNav>
-          <StyledNavLink to="/" foregroundColor={foregroundColor}>
+        <TreeFillIcon scrolled={scrolled} />
+        <Nav>
+          <StyledNavLink exact to="/" scrolled={scrolled}>
             Home
           </StyledNavLink>
-          <StyledNavLink to="/doc" foregroundColor={foregroundColor}>
-            Dokumentation
+          <StyledNavLink exact to="/docs" scrolled={scrolled}>
+            Docs
           </StyledNavLink>
-        </StyledNav>
+        </Nav>
       </Div>
     </StyledNavbar>
   );

@@ -11,7 +11,7 @@ const P = styled.p`
   color: white;
 `;
 
-const Doc = () => (
+const Docs = () => (
   <>
     <Header />
     <Jumbo image="img/785471584-fruehlingslicht-im-wald-2uOMxFGQ4pea.jpg">
@@ -21,4 +21,4 @@ const Doc = () => (
   </>
 );
 
-export default Doc;
+export default Docs;

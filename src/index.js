@@ -3,13 +3,13 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./pages/Home";
-import Doc from "./pages/Doc";
+import Docs from "./pages/Docs";
 
 const App = () => (
   <BrowserRouter>
     <Switch>
-      <Route path="/doc" component={Doc} />
-      <Route path="/" component={Home} />
+      <Route exact path="/" component={Home} />
+      <Route exact path="/docs" component={Docs} />
     </Switch>
   </BrowserRouter>
 );
