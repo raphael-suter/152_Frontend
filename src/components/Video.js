@@ -25,7 +25,7 @@ const Video = () => {
         frameBorder="1"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
-      ></Iframe>
+      />
     </Container>
   );
 };
