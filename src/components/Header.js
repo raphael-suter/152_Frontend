@@ -18,7 +18,7 @@ const StyledNavbar = styled(({ scrolled, ...props }) => <Navbar {...props} />)`
 
 const Div = styled.div`
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
   height: 60px;
   margin: auto;
   display: flex;

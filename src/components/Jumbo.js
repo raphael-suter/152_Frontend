@@ -18,7 +18,7 @@ const Article = styled.article`
 
 const Div = styled.div`
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
 `;
 
 const H1 = styled.h1`
@@ -59,7 +59,8 @@ const P = styled.p`
 `;
 
 const StyledLink = styled(Link)`
-  box-shadow: 0 0 6px rgb(0, 0, 0, 0.4);
+  padding: 0.4rem 1rem;
+  font-weight: bold;
 `;
 
 const jump = keyframes`
