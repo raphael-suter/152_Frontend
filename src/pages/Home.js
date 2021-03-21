@@ -6,6 +6,7 @@ import Container from "../components/Container";
 import Separator from "../components/Separator";
 import Footer from "../components/Footer";
 import Gallery from "../components/Gallery";
+import Video from "../components/Video";
 
 const Home = () => (
   <>
@@ -17,6 +18,12 @@ const Home = () => (
       link="/docs"
       linkText="Dokumentation"
     />
+    <Container color="#ffc107">
+      <h1>Forest Adventures</h1>
+      <p>Modul 152, Raphael Suter</p>
+      <Button variant="outline-light">Dokumentation</Button>
+    </Container>
+    <Separator color1="#ffc107" color2="white" toLeft />
     <Container color="white">
       <Gallery
         images={[
@@ -32,12 +39,11 @@ const Home = () => (
         ]}
       />
     </Container>
-    <Separator color1="white" color2="#ffc107" toLeft />
-    <Container color="#ffc107">
-      <h1>Forest Adventures</h1>
-      <p>Modul 152, Raphael Suter</p>
-      <Button variant="outline-light">Dokumentation</Button>
-    </Container>
+    <Separator color1="white" color2="black" toRight />
+    <Container color="black">
+      <Video />
+    </Container>{" "}
+    <Separator color1="black" color2="white" toLeft />
     <Footer />
   </>
 );

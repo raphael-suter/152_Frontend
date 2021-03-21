@@ -18,7 +18,7 @@ const Article = styled.article`
 
 const Div = styled.div`
   width: 100%;
-  max-width: 1200px;
+  max-width: 1100px;
 `;
 
 const H1 = styled.h1`

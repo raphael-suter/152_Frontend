@@ -8,7 +8,7 @@ const MyContainer = styled.div`
 
 const Content = styled.div`
   width: 100%;
-  max-width: 1200px;
+  max-width: 1100px;
   margin: auto;
 `;
 
