@@ -23,7 +23,7 @@ const Home = () => (
       <p>Modul 152, Raphael Suter</p>
       <Button variant="outline-light">Dokumentation</Button>
     </Container>
-    <Separator color1="#ffc107" color2="white" toLeft />
+    <Separator color1="#ffc107" color2="white" />
     <Container color="white">
       <Gallery
         images={[
@@ -32,14 +32,13 @@ const Home = () => (
           "img/785471584-fruehlingslicht-im-wald-2uOMxFGQ4pea.jpg",
           "img/froschblog_stage_2048x750px_wald.jpg",
           "img/Menschen_im_Wald_2000x.png",
-          "img/spaziergang-im-wald-bac8485a-a104-43fc-84cc-06aa0d65e52d.jpg",
           "img/wald-alt.jpg",
           "img/wald-im-herbst.jpg",
           "img/Wald_JohannesPlenio-.jpg",
         ]}
       />
     </Container>
-    <Separator color1="white" color2="black" toRight />
+    <Separator color1="white" color2="black" />
     <Container color="black">
       <Video />
     </Container>
