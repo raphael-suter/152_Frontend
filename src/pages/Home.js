@@ -42,8 +42,7 @@ const Home = () => (
     <Separator color1="white" color2="black" toRight />
     <Container color="black">
       <Video />
-    </Container>{" "}
-    <Separator color1="black" color2="white" toLeft />
+    </Container>
     <Footer />
   </>
 );
