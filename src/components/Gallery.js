@@ -14,9 +14,15 @@ const Frame = styled.div`
   border-radius: 0.25rem;
 `;
 
-const Gallery = ({ images }) => {
+const Gallery = ({ images, children }) => {
   const frames = images.map((src, index) => <Frame key={index} src={src} />);
-  return <Grid>{frames}</Grid>;
+
+  return (
+    <Grid>
+      {frames}
+      {children}
+    </Grid>
+  );
 };
 
 export default Gallery;
