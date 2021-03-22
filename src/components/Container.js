@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const MyContainer = styled.div`
-  padding: 2rem 1.5rem;
+  padding: 1.8rem 1.5rem;
   background: ${({ backgroundColor }) => backgroundColor};
 `;
 
