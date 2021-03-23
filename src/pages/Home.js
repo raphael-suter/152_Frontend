@@ -18,7 +18,8 @@ const Home = () => (
       link="/docs"
       linkText="Dokumentation"
     />
-    <Separator color1="#ffc107" color2="white" />
+    <Separator color1="#ffc107" color2="black" />
+    <Separator color1="black" color2="white" />
     <Container color="white">
       <Gallery
         images={[

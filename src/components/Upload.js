@@ -29,7 +29,7 @@ const Upload = () => {
   return (
     <Container>
       <input type="file" id="upload" />
-      <Label for="upload" className="btn btn-warning">
+      <Label htmlFor="upload" className="btn btn-warning">
         <PlusIcon />
       </Label>
     </Container>

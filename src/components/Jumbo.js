@@ -59,7 +59,7 @@ const P = styled.p`
 `;
 
 const StyledLink = styled(Link)`
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   padding: 0.4rem 1rem;
   font-weight: bold;
 `;
