@@ -18,12 +18,12 @@ const Docs = () => (
     />
     <Separator color1="#ffc107" color2="black" />
     <Separator color1="black" color2="white" />
-    <Container color="white">
-      <Title color="black">Entscheidungen</Title>
-      <Photo src="img/Styling.png" />
-      <Photo src="img/Framework.png" />
-      <Photo src="img/IDE.png" />
-    </Container>
+      <Container color="white">
+          <Title color="black">Entscheidungen</Title>
+          <Photo src="img/Styling.png" />
+          <Photo src="img/Framework.png" />
+          <Photo src="img/IDE.png" />
+      </Container>
     <Separator color1="white" color2="black" />
     <Container color="black">
       <Title color="white">Externe Module</Title>
