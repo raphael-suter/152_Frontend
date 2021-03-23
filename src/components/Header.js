@@ -13,7 +13,7 @@ const StyledNavbar = styled(({ scrolled, ...props }) => <Navbar {...props} />)`
   background: ${({ scrolled }) => (scrolled ? "white" : "transparent")};
   box-shadow: ${({ scrolled }) =>
     scrolled ? "0 0 6px rgb(0, 0, 0, 0.4)" : "none"};
-  z-index: 1000;
+  z-index: 100;
 `;
 
 const Div = styled.div`
