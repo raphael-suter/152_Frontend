@@ -12,7 +12,7 @@ const Home = () => (
   <>
     <Header />
     <Jumbo
-      image="img/wald-im-herbst.jpg"
+      image="img/background1.jpg"
       title="Forest Adventures"
       subtitle="Modul 152, Raphael Suter"
       link="/docs"
@@ -23,15 +23,55 @@ const Home = () => (
     <Container color="white">
       <Gallery
         images={[
-          "img/541db11f-97b4-4af8-84ad-e745cab6e99e.jpeg",
-          "img/70459ab0-553a-4dbb-bc67-697b55a1f011.jpeg",
-          "img/785471584-fruehlingslicht-im-wald-2uOMxFGQ4pea.jpg",
-          "img/froschblog_stage_2048x750px_wald.jpg",
-          "img/spaziergang-im-wald-bac8485a-a104-43fc-84cc-06aa0d65e52d.jpg",
-          "img/Menschen_im_Wald_2000x.png",
-          "img/wald-alt.jpg",
-          "img/wald-im-herbst.jpg",
-          "img/Wald_JohannesPlenio-.jpg",
+          "img/photo1.jpg",
+          "img/photo2.jpg",
+          "img/photo3.jpg",
+          "img/photo4.jpg",
+          "img/photo5.jpg",
+          "img/photo6.jpg",
+          "img/photo7.jpg",
+          "img/photo8.jpg",
+          "img/photo9.jpg",
+          "img/photo10.jpg",
+          "img/photo11.jpg",
+          "img/photo12.jpg",
+          "img/photo13.jpg",
+          "img/photo14.jpg",
+          "img/photo15.jpg",
+          "img/photo16.jpg",
+          "img/photo17.jpg",
+          "img/photo18.jpg",
+          "img/photo19.jpg",
+          "img/photo20.jpg",
+          "img/photo21.jpg",
+          "img/photo22.jpg",
+          "img/photo23.jpg",
+          "img/photo24.jpg",
+          "img/photo25.jpg",
+          "img/photo26.jpg",
+          "img/photo27.jpg",
+          "img/photo28.jpg",
+          "img/photo29.jpg",
+          "img/photo30.jpg",
+          "img/photo31.jpg",
+          "img/photo32.jpg",
+          "img/photo33.jpg",
+          "img/photo34.jpg",
+          "img/photo35.jpg",
+          "img/photo36.jpg",
+          "img/photo37.jpg",
+          "img/photo38.jpg",
+          "img/photo39.jpg",
+          "img/photo40.jpg",
+          "img/photo41.jpg",
+          "img/photo42.jpg",
+          "img/photo43.jpg",
+          "img/photo44.jpg",
+          "img/photo45.jpg",
+          "img/photo46.jpg",
+          "img/photo47.jpg",
+          "img/photo48.jpg",
+          "img/photo49.jpg",
         ]}
       >
         <Upload />
