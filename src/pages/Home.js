@@ -12,7 +12,7 @@ const Home = () => (
   <>
     <Header />
     <Jumbo
-      image="img/background1.jpg"
+      image="img/background1edit.jpg"
       title="Forest Adventures"
       subtitle="Modul 152, Raphael Suter"
       link="/docs"
@@ -23,6 +23,8 @@ const Home = () => (
     <Container color="white">
       <Gallery
         images={[
+          "img/background1edit.jpg",
+          "img/background2edit.jpg",
           "img/photo1.jpg",
           "img/photo2.jpg",
           "img/photo3.jpg",
@@ -36,15 +38,15 @@ const Home = () => (
           "img/photo11.jpg",
           "img/photo12.jpg",
           "img/photo13.jpg",
-          "img/photo14.jpg",
+          "img/photo14edit.jpg",
           "img/photo15.jpg",
           "img/photo16.jpg",
           "img/photo17.jpg",
-          "img/photo18.jpg",
+          "img/photo18edit.jpg",
           "img/photo19.jpg",
           "img/photo20.jpg",
           "img/photo21.jpg",
-          "img/photo22.jpg",
+          "img/photo22edit.jpg",
           "img/photo23.jpg",
           "img/photo24.jpg",
           "img/photo25.jpg",
@@ -63,11 +65,11 @@ const Home = () => (
           "img/photo38.jpg",
           "img/photo39.jpg",
           "img/photo40.jpg",
-          "img/photo41.png",
+          "img/photo41edit.png",
           "img/photo42.jpg",
           "img/photo43.jpg",
           "img/photo44.jpg",
-          "img/photo45.jpg",
+          "img/photo45edit.jpg",
           "img/photo46.jpg",
           "img/photo47.jpg",
           "img/photo48.jpg",

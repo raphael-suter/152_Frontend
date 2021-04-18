@@ -12,7 +12,7 @@ const Docs = () => (
   <>
     <Header />
     <Jumbo
-      image="img/background2.jpg"
+      image="img/background2edit.jpg"
       title="Dokumentation"
       subtitle="Modul 152, Raphael Suter"
     />
