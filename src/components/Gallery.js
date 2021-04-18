@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { ArrowLeft, ArrowRight, Eraser, Info, X } from "react-bootstrap-icons";
 
 const Grid = styled.div`
@@ -14,6 +14,10 @@ const Frame = styled.div`
   background-image: url(${({ src }) => src});
   border-radius: 0.25rem;
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 const Modal = styled.div`
@@ -22,11 +26,16 @@ const Modal = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: black;
   z-index: 1000;
+`;
+
+const ImgWrapper = styled.div`
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Img = styled.img`
@@ -117,7 +126,7 @@ const Gallery = ({ images, children }) => {
     return <Frame key={index} src={src} onClick={() => setOpen(index)} />;
   });
 
-  const getCorrectImage = () => {
+  const getCorrectImage = (open) => {
     let image = images[open];
 
     if (Array.isArray(image)) {
@@ -140,13 +149,19 @@ const Gallery = ({ images, children }) => {
             <FilterIcon onClick={() => setOriginal(!original)} />
           )}
           <CloseIcon onClick={() => setOpen(-1)} />
-          <ArrowLeftIcon
-            onClick={() => setOpen(min(max(open - 1, 0), images.length - 1))}
-          />
-          <Img src={getCorrectImage()} />
-          <ArrowRightIcon
-            onClick={() => setOpen(min(max(open + 1, 0), images.length - 1))}
-          />
+          {open > 0 && (
+            <ArrowLeftIcon
+              onClick={() => setOpen(min(max(open - 1, 0), images.length - 1))}
+            />
+          )}
+          <ImgWrapper>
+            <Img src={getCorrectImage(open)} />
+          </ImgWrapper>
+          {open < images.length - 1 && (
+            <ArrowRightIcon
+              onClick={() => setOpen(min(max(open + 1, 0), images.length - 1))}
+            />
+          )}
         </Modal>
       )}
     </>
