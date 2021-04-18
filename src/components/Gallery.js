@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { ArrowLeft, ArrowRight, X } from "react-bootstrap-icons";
+import { ArrowLeft, ArrowRight, Eraser, Info, X } from "react-bootstrap-icons";
 
 const Grid = styled.div`
   display: grid;
@@ -32,6 +32,34 @@ const Modal = styled.div`
 const Img = styled.img`
   max-height: 100vh;
   max-width: 100vw;
+`;
+
+const InfoIcon = styled(Info)`
+  position: absolute;
+  right: 6rem;
+  top: 2rem;
+  width: 40px;
+  height: 40px;
+  padding: 6px;
+  border-radius: 100%;
+  border: 2px solid white;
+  background: rgb(0, 0, 0, 0.5);
+  color: white;
+  cursor: pointer;
+`;
+
+const FilterIcon = styled(Eraser)`
+  position: absolute;
+  right: 10rem;
+  top: 2rem;
+  width: 40px;
+  height: 40px;
+  padding: 6px;
+  border-radius: 100%;
+  border: 2px solid white;
+  background: rgb(0, 0, 0, 0.5);
+  color: white;
+  cursor: pointer;
 `;
 
 const CloseIcon = styled(X)`
@@ -78,11 +106,26 @@ const ArrowRightIcon = styled(ArrowRight)`
 
 const Gallery = ({ images, children }) => {
   const [open, setOpen] = useState(-1);
+  const [original, setOriginal] = useState(false);
   const { min, max } = Math;
 
-  const frames = images.map((src, index) => (
-    <Frame key={index} src={src} onClick={() => setOpen(index)} />
-  ));
+  const frames = images.map((src, index) => {
+    if (Array.isArray(src)) {
+      src = src[0];
+    }
+
+    return <Frame key={index} src={src} onClick={() => setOpen(index)} />;
+  });
+
+  const getCorrectImage = () => {
+    let image = images[open];
+
+    if (Array.isArray(image)) {
+      image = image[original ? 1 : 0];
+    }
+
+    return image;
+  };
 
   return (
     <>
@@ -92,11 +135,15 @@ const Gallery = ({ images, children }) => {
       </Grid>
       {open >= 0 && (
         <Modal>
+          <InfoIcon onClick={() => setOpen(-1)} />
+          {Array.isArray(images[open]) && (
+            <FilterIcon onClick={() => setOriginal(!original)} />
+          )}
           <CloseIcon onClick={() => setOpen(-1)} />
           <ArrowLeftIcon
             onClick={() => setOpen(min(max(open - 1, 0), images.length - 1))}
           />
-          <Img src={images[open]} />
+          <Img src={getCorrectImage()} />
           <ArrowRightIcon
             onClick={() => setOpen(min(max(open + 1, 0), images.length - 1))}
           />

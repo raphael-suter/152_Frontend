@@ -65,7 +65,7 @@ const Home = () => (
           "img/photo38.jpg",
           "img/photo39.jpg",
           "img/photo40.jpg",
-          ["img/photo41edit.png", "img/photo41.png"],
+          ["img/photo41edit.png", "img/photo41.jpg"],
           "img/photo42.jpg",
           "img/photo43.jpg",
           "img/photo44.jpg",
