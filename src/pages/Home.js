@@ -63,15 +63,14 @@ const Home = () => (
           "img/photo38.jpg",
           "img/photo39.jpg",
           "img/photo40.jpg",
-          "img/photo41.jpg",
-          "img/photo42.png",
+          "img/photo41.png",
+          "img/photo42.jpg",
           "img/photo43.jpg",
           "img/photo44.jpg",
           "img/photo45.jpg",
           "img/photo46.jpg",
           "img/photo47.jpg",
           "img/photo48.jpg",
-          "img/photo49.jpg",
         ]}
       >
         <Upload />
