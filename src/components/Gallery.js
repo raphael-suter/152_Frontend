@@ -1,6 +1,14 @@
 import React, { useState } from "react";
-import styled, { keyframes } from "styled-components";
-import { ArrowLeft, ArrowRight, Eraser, Info, X } from "react-bootstrap-icons";
+import styled from "styled-components";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Eraser,
+  EraserFill,
+  Info,
+  X,
+} from "react-bootstrap-icons";
+import "./animations.css";
 
 const Grid = styled.div`
   display: grid;
@@ -30,12 +38,20 @@ const Modal = styled.div`
   z-index: 1000;
 `;
 
+const SlidesWrapper = styled.div`
+  position: relative;
+  z-index: -100;
+`;
+
 const ImgWrapper = styled.div`
+  position: absolute;
+  top: 0;
   display: flex;
   height: 100vh;
   width: 100%;
   justify-content: center;
   align-items: center;
+  background: black;
 `;
 
 const Img = styled.img`
@@ -57,7 +73,7 @@ const InfoIcon = styled(Info)`
   cursor: pointer;
 `;
 
-const FilterIcon = styled(Eraser)`
+const FilterOffIcon = styled(Eraser)`
   position: absolute;
   right: 10rem;
   top: 2rem;
@@ -68,6 +84,20 @@ const FilterIcon = styled(Eraser)`
   border: 2px solid white;
   background: rgb(0, 0, 0, 0.5);
   color: white;
+  cursor: pointer;
+`;
+
+const FilterOnIcon = styled(EraserFill)`
+  position: absolute;
+  right: 10rem;
+  top: 2rem;
+  width: 40px;
+  height: 40px;
+  padding: 6px;
+  border-radius: 100%;
+  border: 2px solid white;
+  background: white;
+  color: rgb(0, 0, 0, 0.5);
   cursor: pointer;
 `;
 
@@ -114,16 +144,18 @@ const ArrowRightIcon = styled(ArrowRight)`
 `;
 
 const Gallery = ({ images, children }) => {
-  const [open, setOpen] = useState(-1);
+  const [current, setCurrent] = useState(-1);
+  const [next, setNext] = useState(-1);
+  const [animationCurrent, setAnimationCurrent] = useState("");
+  const [animationNext, setAnimationNext] = useState("");
   const [original, setOriginal] = useState(false);
-  const { min, max } = Math;
 
   const frames = images.map((src, index) => {
     if (Array.isArray(src)) {
       src = src[0];
     }
 
-    return <Frame key={index} src={src} onClick={() => setOpen(index)} />;
+    return <Frame key={index} src={src} onClick={() => setCurrent(index)} />;
   });
 
   const getCorrectImage = (open) => {
@@ -136,31 +168,57 @@ const Gallery = ({ images, children }) => {
     return image;
   };
 
+  const switchSlide = (step) => {
+    setNext(current + step);
+
+    if (step > 0) {
+      setAnimationCurrent("slideOutLeft");
+      setAnimationNext("slideInRight");
+    } else {
+      setAnimationCurrent("slideOutRight");
+      setAnimationNext("slideInLeft");
+    }
+  };
+
+  const getFilter = () => {
+    return original ? (
+      <FilterOnIcon onClick={() => setOriginal(!original)} />
+    ) : (
+      <FilterOffIcon onClick={() => setOriginal(!original)} />
+    );
+  };
+
   return (
     <>
       <Grid>
         {frames}
         {children}
       </Grid>
-      {open >= 0 && (
+      {current >= 0 && (
         <Modal>
-          <InfoIcon onClick={() => setOpen(-1)} />
-          {Array.isArray(images[open]) && (
-            <FilterIcon onClick={() => setOriginal(!original)} />
-          )}
-          <CloseIcon onClick={() => setOpen(-1)} />
-          {open > 0 && (
-            <ArrowLeftIcon
-              onClick={() => setOpen(min(max(open - 1, 0), images.length - 1))}
-            />
-          )}
-          <ImgWrapper>
-            <Img src={getCorrectImage(open)} />
-          </ImgWrapper>
-          {open < images.length - 1 && (
-            <ArrowRightIcon
-              onClick={() => setOpen(min(max(open + 1, 0), images.length - 1))}
-            />
+          <InfoIcon onClick={() => setCurrent(-1)} />
+          {Array.isArray(images[current]) && getFilter()}
+          <CloseIcon onClick={() => setCurrent(-1)} />
+          {current > 0 && <ArrowLeftIcon onClick={() => switchSlide(-1)} />}
+          <SlidesWrapper>
+            <ImgWrapper
+              className={animationNext}
+              onAnimationEnd={() => setAnimationNext("")}
+            >
+              <Img src={getCorrectImage(next)} />
+            </ImgWrapper>
+            <ImgWrapper
+              className={animationCurrent}
+              onAnimationEnd={() => {
+                setAnimationCurrent("");
+                setCurrent(next);
+              }}
+            >
+              <Img src={getCorrectImage(current)} />
+            </ImgWrapper>
+          </SlidesWrapper>
+          {current < images.length - 1 && (
+            <ArrowRightIcon onClick={() => switchSlide(1)} />
           )}
         </Modal>
       )}
