@@ -9,6 +9,8 @@ import {
   X,
 } from "react-bootstrap-icons";
 import "./animations.css";
+import EXIF from "exif-js";
+import { ListGroup } from "react-bootstrap";
 
 const Grid = styled.div`
   display: grid;
@@ -40,7 +42,7 @@ const Modal = styled.div`
 
 const SlidesWrapper = styled.div`
   position: relative;
-  z-index: -100;
+  z-index: -1000;
 `;
 
 const ImgWrapper = styled.div`
@@ -59,7 +61,7 @@ const Img = styled.img`
   max-width: 100vw;
 `;
 
-const InfoIcon = styled(Info)`
+const InfoOffIcon = styled(Info)`
   position: absolute;
   right: 6rem;
   top: 2rem;
@@ -70,6 +72,20 @@ const InfoIcon = styled(Info)`
   border: 2px solid white;
   background: rgb(0, 0, 0, 0.5);
   color: white;
+  cursor: pointer;
+`;
+
+const InfoOnIcon = styled(Info)`
+  position: absolute;
+  right: 6rem;
+  top: 2rem;
+  width: 40px;
+  height: 40px;
+  padding: 6px;
+  border-radius: 100%;
+  border: 2px solid white;
+  background: white;
+  color: rgb(0, 0, 0, 0.5);
   cursor: pointer;
 `;
 
@@ -118,7 +134,7 @@ const CloseIcon = styled(X)`
 const ArrowLeftIcon = styled(ArrowLeft)`
   position: absolute;
   left: 2rem;
-  bottom: 2rem;
+  top: 2rem;
   width: 40px;
   height: 40px;
   padding: 6px;
@@ -143,19 +159,56 @@ const ArrowRightIcon = styled(ArrowRight)`
   cursor: pointer;
 `;
 
+const ListWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(0, 0, 0, 0.6);
+`;
+
+const List = styled(ListGroup)`
+  width: 100%;
+  max-width: 800px;
+  border-top: 1px solid white;
+  border-radius: 0;
+`;
+
+const ListItem = styled(({ children, ...props }) => (
+  <ListGroup.Item {...props}>{children}</ListGroup.Item>
+))`
+  padding: 0.8rem;
+  background: transparent;
+  border-bottom: 1px solid white;
+  border-radius: 0;
+  color: white;
+`;
+
 const Gallery = ({ images, children }) => {
   const [current, setCurrent] = useState(-1);
   const [next, setNext] = useState(-1);
   const [animationCurrent, setAnimationCurrent] = useState("");
   const [animationNext, setAnimationNext] = useState("");
   const [original, setOriginal] = useState(false);
+  const [information, setInformation] = useState([]);
 
   const frames = images.map((src, index) => {
     if (Array.isArray(src)) {
       src = src[0];
     }
 
-    return <Frame key={index} src={src} onClick={() => setCurrent(index)} />;
+    const onClick = () => {
+      setCurrent(index);
+      setOriginal(false);
+      setInformation([]);
+    };
+
+    return <Frame key={index} src={src} onClick={onClick} />;
   });
 
   const getCorrectImage = (open) => {
@@ -170,6 +223,8 @@ const Gallery = ({ images, children }) => {
 
   const switchSlide = (step) => {
     setNext(current + step);
+    setOriginal(false);
+    setInformation([]);
 
     if (step > 0) {
       setAnimationCurrent("slideOutLeft");
@@ -181,11 +236,29 @@ const Gallery = ({ images, children }) => {
   };
 
   const getFilter = () => {
+    const onClick = () => setOriginal(!original);
+
     return original ? (
-      <FilterOnIcon onClick={() => setOriginal(!original)} />
+      <FilterOnIcon onClick={onClick} />
     ) : (
-      <FilterOffIcon onClick={() => setOriginal(!original)} />
+      <FilterOffIcon onClick={onClick} />
     );
+  };
+
+  const getInfo = () => {
+    return information.length > 0 ? (
+      <InfoOnIcon onClick={() => setInformation([])} />
+    ) : (
+      <InfoOffIcon onClick={showInformation} />
+    );
+  };
+
+  const showInformation = () => {
+    const img = document.getElementById("currentImage");
+
+    EXIF.getData(img, () => {
+      setInformation(["lol"]);
+    });
   };
 
   return (
@@ -196,10 +269,19 @@ const Gallery = ({ images, children }) => {
       </Grid>
       {current >= 0 && (
         <Modal>
-          <InfoIcon onClick={() => setCurrent(-1)} />
+          {getInfo()}
           {Array.isArray(images[current]) && getFilter()}
           <CloseIcon onClick={() => setCurrent(-1)} />
           {current > 0 && <ArrowLeftIcon onClick={() => switchSlide(-1)} />}
+          {information.length > 0 && (
+            <ListWrapper>
+              <List>
+                {information.map((item, index) => (
+                  <ListItem key={index}>{item}</ListItem>
+                ))}
+              </List>
+            </ListWrapper>
+          )}
           <SlidesWrapper>
             <ImgWrapper
               className={animationNext}
@@ -214,7 +296,7 @@ const Gallery = ({ images, children }) => {
                 setCurrent(next);
               }}
             >
-              <Img src={getCorrectImage(current)} />
+              <Img src={getCorrectImage(current)} id="currentImage" />
             </ImgWrapper>
           </SlidesWrapper>
           {current < images.length - 1 && (
