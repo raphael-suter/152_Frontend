@@ -3,9 +3,11 @@ import styled from "styled-components";
 import {
   ArrowLeft,
   ArrowRight,
+  Dash,
   Eraser,
   EraserFill,
   Info,
+  Plus,
   X,
 } from "react-bootstrap-icons";
 import "./animations.css";
@@ -54,11 +56,13 @@ const ImgWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background: black;
+  overflow: auto;
 `;
 
 const Img = styled.img`
   max-height: 100vh;
   max-width: 100vw;
+  transform: scale(${({ zoom }) => zoom});
 `;
 
 const InfoOffIcon = styled(Info)`
@@ -159,6 +163,34 @@ const ArrowRightIcon = styled(ArrowRight)`
   cursor: pointer;
 `;
 
+const ZoomIn = styled(Plus)`
+  position: absolute;
+  left: 6rem;
+  bottom: 2rem;
+  width: 40px;
+  height: 40px;
+  padding: 6px;
+  border-radius: 100%;
+  border: 2px solid white;
+  background: rgb(0, 0, 0, 0.5);
+  color: white;
+  cursor: pointer;
+`;
+
+const ZoomOut = styled(Dash)`
+  position: absolute;
+  left: 2rem;
+  bottom: 2rem;
+  width: 40px;
+  height: 40px;
+  padding: 6px;
+  border-radius: 100%;
+  border: 2px solid white;
+  background: rgb(0, 0, 0, 0.5);
+  color: white;
+  cursor: pointer;
+`;
+
 const ListWrapper = styled.div`
   position: absolute;
   top: 0;
@@ -196,6 +228,7 @@ const Gallery = ({ images, children }) => {
   const [animationNext, setAnimationNext] = useState("");
   const [original, setOriginal] = useState(false);
   const [information, setInformation] = useState([]);
+  const [zoom, setZoom] = useState(1);
 
   const frames = images.map((src, index) => {
     if (Array.isArray(src)) {
@@ -206,6 +239,7 @@ const Gallery = ({ images, children }) => {
       setCurrent(index);
       setOriginal(false);
       setInformation([]);
+      setZoom(1);
     };
 
     return <Frame key={index} src={src} onClick={onClick} />;
@@ -225,6 +259,7 @@ const Gallery = ({ images, children }) => {
     setNext(current + step);
     setOriginal(false);
     setInformation([]);
+    setZoom(1);
 
     if (step > 0) {
       setAnimationCurrent("slideOutLeft");
@@ -254,10 +289,16 @@ const Gallery = ({ images, children }) => {
   };
 
   const showInformation = () => {
-    const img = document.getElementById("currentImage");
+    const img = new Image(100, 200);
+    img.src = getCorrectImage(current);
 
     EXIF.getData(img, () => {
-      setInformation(["lol"]);
+      setInformation([
+        `Belichtungszeit: 1/${Math.floor(
+          1 / EXIF.getTag(img, "ExposureTime")
+        )} Sek.`,
+        `ISO-Filmempfindlichkeit: ISO-${EXIF.getTag(img, "ISOSpeedRatings")}`,
+      ]);
     });
   };
 
@@ -272,6 +313,8 @@ const Gallery = ({ images, children }) => {
           {getInfo()}
           {Array.isArray(images[current]) && getFilter()}
           <CloseIcon onClick={() => setCurrent(-1)} />
+          <ZoomIn onClick={() => setZoom(zoom + 0.1)} />
+          <ZoomOut onClick={() => setZoom(zoom - 0.1)} />
           {current > 0 && <ArrowLeftIcon onClick={() => switchSlide(-1)} />}
           {information.length > 0 && (
             <ListWrapper>
@@ -296,7 +339,7 @@ const Gallery = ({ images, children }) => {
                 setCurrent(next);
               }}
             >
-              <Img src={getCorrectImage(current)} id="currentImage" />
+              <Img src={getCorrectImage(current)} zoom={zoom} />
             </ImgWrapper>
           </SlidesWrapper>
           {current < images.length - 1 && (
