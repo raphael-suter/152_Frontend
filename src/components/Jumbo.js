@@ -4,6 +4,7 @@ import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
 
 const Article = styled.article`
+  position: relative;
   width: 100%;
   height: 100vh;
   padding: 1rem 1.5rem;
@@ -19,6 +20,7 @@ const Article = styled.article`
 const Div = styled.div`
   width: 100%;
   max-width: 1100px;
+  z-index: 100;
 `;
 
 const H1 = styled.h1`
@@ -89,8 +91,19 @@ const ArrowDownIcon = styled(ArrowDown)`
   animation: ${jump} 2s linear infinite;
 `;
 
-const Header = ({ image, title, subtitle, link, linkText }) => (
+const Video = styled.video`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+`;
+
+const Header = ({ image, video, title, subtitle, link, linkText }) => (
   <Article image={image}>
+    <Video autoPlay muted loop>
+      <source src={video} type="video/mp4" />
+    </Video>
     <Div>
       <H1>{title}</H1>
       <P>{subtitle}</P>
