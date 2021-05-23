@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "dependencies": {
     "bootstrap": "^4.6.0",
+    "bootstrap-icons": "^1.4.1",
     "exif-js": "^2.3.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
